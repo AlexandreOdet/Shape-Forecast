@@ -20,6 +20,6 @@ final class FindLocationRouter {
 
 extension FindLocationRouter: FindLocationInteractorAction {
     func locationSelected(at coordinate: CLLocationCoordinate2D) {
-
+        
     }
 }
