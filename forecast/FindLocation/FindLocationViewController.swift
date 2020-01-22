@@ -50,8 +50,12 @@ final class FindLocationViewController: UIViewController {
         dump(point)
         print("--- END OF TAP ---")
         
+        let coordinates = mapView.convert(point, toCoordinateFrom: mapView)
+        
+        print(coordinates)
+        
         //
-        // output.locationSelected(at: CLLocationCoordinate2D)
+         output.locationSelected(at: coordinates)
     }
     
 }
