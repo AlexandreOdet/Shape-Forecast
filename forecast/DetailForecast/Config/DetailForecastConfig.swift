@@ -12,14 +12,14 @@ import API
 struct DetailForecastConfig {
     static func build(with apiClient: ForecastClient) -> UIViewController {
         let viewController = DetailForecastViewController()
-        //let interactor = DetailForecastInteractor(with: apiClient)
-        //let presenter = DetailForecastPresenter()
-        //let router = DetailForecastRouter(with: apiClient)
+        let interactor = DetailForecastInteractor(with: apiClient)
+        let presenter = DetailForecastPresenter()
+        let router = DetailForecastRouter(with: apiClient)
         
-        //viewController.output = interactor
-        //interactor.action = router
-        //interactor.output = presenter
-        //presenter.output = viewController
+        viewController.interactor = interactor
+        interactor.action = router
+        interactor.output = presenter
+        presenter.output = viewController
         
         return viewController
     }

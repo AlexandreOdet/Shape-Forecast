@@ -10,5 +10,13 @@ import Foundation
 import API
 
 final class DetailForecastRouter {
+    private let apiClient: ForecastClient
+    
+    init(with apiClient: ForecastClient) {
+        self.apiClient = apiClient
+    }
+}
+
+extension DetailForecastRouter: DetailForecastInteractorAction {
     
 }

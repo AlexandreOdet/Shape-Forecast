@@ -14,5 +14,9 @@ protocol DetailForecastViewControllerOutput: class { //Interactor
 }
 
 final class DetailForecastViewController: UIViewController {
+    weak var interactor: DetailForecastViewControllerOutput!
+}
+
+extension DetailForecastViewController: DetailForecastPresenterOutput {
     
 }

@@ -40,6 +40,7 @@
 		52C7E7F523D8A06700B8F3F9 /* DetailForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7F423D8A06700B8F3F9 /* DetailForecastViewController.swift */; };
 		52C7E7F723D8A1B500B8F3F9 /* DetailForecastInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7F623D8A1B500B8F3F9 /* DetailForecastInteractor.swift */; };
 		52C7E7F923D8A21B00B8F3F9 /* DetailForecastRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7F823D8A21B00B8F3F9 /* DetailForecastRouter.swift */; };
+		52C7E7FC23D8A4C700B8F3F9 /* DetailForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7FB23D8A4C700B8F3F9 /* DetailForecastPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		52C7E7F423D8A06700B8F3F9 /* DetailForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastViewController.swift; sourceTree = "<group>"; };
 		52C7E7F623D8A1B500B8F3F9 /* DetailForecastInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastInteractor.swift; sourceTree = "<group>"; };
 		52C7E7F823D8A21B00B8F3F9 /* DetailForecastRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastRouter.swift; sourceTree = "<group>"; };
+		52C7E7FB23D8A4C700B8F3F9 /* DetailForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +210,7 @@
 		3689B1DF221BE73D00E50ED5 /* FindLocation */ = {
 			isa = PBXGroup;
 			children = (
-				3689B1E2221BE8DD00E50ED5 /* FindLocationConfig.swift */,
+				52C7E7FD23D8A59700B8F3F9 /* Config */,
 				3689B1E4221BE8E500E50ED5 /* FindLocationViewController.swift */,
 				3689B1E6221BE8EE00E50ED5 /* FindLocationInteractor.swift */,
 				3689B1E8221BE8F500E50ED5 /* FindLocationRouter.swift */,
@@ -290,12 +292,29 @@
 		52C7E7F123D8A03900B8F3F9 /* DetailForecast */ = {
 			isa = PBXGroup;
 			children = (
-				52C7E7F223D8A04C00B8F3F9 /* DetailForecastConfig.swift */,
+				52C7E7FA23D8A4B100B8F3F9 /* Config */,
 				52C7E7F423D8A06700B8F3F9 /* DetailForecastViewController.swift */,
 				52C7E7F623D8A1B500B8F3F9 /* DetailForecastInteractor.swift */,
 				52C7E7F823D8A21B00B8F3F9 /* DetailForecastRouter.swift */,
+				52C7E7FB23D8A4C700B8F3F9 /* DetailForecastPresenter.swift */,
 			);
 			path = DetailForecast;
+			sourceTree = "<group>";
+		};
+		52C7E7FA23D8A4B100B8F3F9 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				52C7E7F223D8A04C00B8F3F9 /* DetailForecastConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		52C7E7FD23D8A59700B8F3F9 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				3689B1E2221BE8DD00E50ED5 /* FindLocationConfig.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,6 +514,7 @@
 				3689B1E7221BE8EE00E50ED5 /* FindLocationInteractor.swift in Sources */,
 				52C7E7F923D8A21B00B8F3F9 /* DetailForecastRouter.swift in Sources */,
 				52C7E7F323D8A04C00B8F3F9 /* DetailForecastConfig.swift in Sources */,
+				52C7E7FC23D8A4C700B8F3F9 /* DetailForecastPresenter.swift in Sources */,
 				3689B1E5221BE8E500E50ED5 /* FindLocationViewController.swift in Sources */,
 				3689B1EB221BE8FC00E50ED5 /* FindLocationPresenter.swift in Sources */,
 				3689B1E3221BE8DD00E50ED5 /* FindLocationConfig.swift in Sources */,
