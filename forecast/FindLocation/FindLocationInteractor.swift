@@ -11,6 +11,7 @@ import API
 import Entities
 
 protocol FindLocationInteractorOutput: class {
+    func addPoint(at coordinates: CLLocationCoordinate2D)
 }
 
 protocol FindLocationInteractorAction: class {
@@ -37,5 +38,9 @@ extension FindLocationInteractor: FindLocationViewControllerOutput {
     
     func locationSelected(at coordinate: CLLocationCoordinate2D) {
         action.locationSelected(at: coordinate)
+    }
+    
+    func addPoint(at coordinate: CLLocationCoordinate2D) {
+        output.addPoint(at: coordinate)
     }
 }

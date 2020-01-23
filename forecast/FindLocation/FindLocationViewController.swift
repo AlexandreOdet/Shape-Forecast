@@ -11,6 +11,7 @@ import MapKit
 
 protocol FindLocationViewControllerOutput: class {
     func viewIsReady()
+    func addPoint(at coordinate: CLLocationCoordinate2D)
     func locationSelected(at coordinate: CLLocationCoordinate2D)
 }
 
@@ -50,14 +51,15 @@ final class FindLocationViewController: UIViewController {
         dump(point)
         print("--- END OF TAP ---")
         
+        //Convert point into CLLocationCoordinate2D.
         let coordinates = mapView.convert(point, toCoordinateFrom: mapView)
-        
-        print(coordinates)
-        
-        //
-         output.locationSelected(at: coordinates)
+        output.addPoint(at: coordinates)
     }
     
 }
 
-extension FindLocationViewController: FindLocationPresenterOutput {}
+extension FindLocationViewController: FindLocationPresenterOutput {
+    func addPoint(at coordinates: CLLocationCoordinate2D) {
+        //Add a point on a map with custom button to access detail forecast.
+    }
+}
