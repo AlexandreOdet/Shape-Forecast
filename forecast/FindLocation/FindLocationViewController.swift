@@ -44,22 +44,16 @@ final class FindLocationViewController: UIViewController {
     @objc
     private func findLocation(_ gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: mapView)
-        print("""
-        --- FIND LOCATION
-        --- Map tapped at point
-        """)
-        dump(point)
-        print("--- END OF TAP ---")
-        
         //Convert point into CLLocationCoordinate2D.
         let coordinates = mapView.convert(point, toCoordinateFrom: mapView)
         output.addPoint(at: coordinates)
     }
-    
 }
 
 extension FindLocationViewController: FindLocationPresenterOutput {
     func addPoint(at coordinates: CLLocationCoordinate2D) {
         //Add a point on a map with custom button to access detail forecast.
+        let annotation = FindLocationAnnotation(with: "", and: coordinates)
+        mapView.addAnnotation(annotation)
     }
 }
