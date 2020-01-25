@@ -11,11 +11,12 @@ import API
 import Entities
 
 protocol FindLocationInteractorOutput: class {
-    func addPoint(at coordinates: CLLocationCoordinate2D)
 }
 
 protocol FindLocationInteractorAction: class {
     func locationSelected(at coordinate: CLLocationCoordinate2D)
+    func weatherFecthDidFail()
+    func weatherFetched()
 }
 
 
@@ -24,7 +25,7 @@ final class FindLocationInteractor {
     var action: FindLocationInteractorAction!
     
     let api: ForecastClient
-    
+        
     init(api apiClient: ForecastClient) {
         self.api = apiClient
     }
@@ -38,9 +39,17 @@ extension FindLocationInteractor: FindLocationViewControllerOutput {
     
     func locationSelected(at coordinate: CLLocationCoordinate2D) {
         action.locationSelected(at: coordinate)
+        api.perform(CurrentWeather.getCurrent(for: coordinate.latitude, and: coordinate.longitude), completion: { result in
+            if result.error != nil {
+                self.action.weatherFecthDidFail()
+            } else {
+                self.action.weatherFetched()
+                //Display weather
+                let weather = result.value!
+                print(weather.weather.first!)
+            }
+            }).resume()
     }
     
-    func addPoint(at coordinate: CLLocationCoordinate2D) {
-        output.addPoint(at: coordinate)
-    }
 }
+

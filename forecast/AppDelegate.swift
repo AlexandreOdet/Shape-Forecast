@@ -16,10 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let client = ForecastClient(appId: "961543a00a91c2de2cfcb48781ac1b11")
+        let client = ForecastClient(appId: "2d59b6f6fd3b090e08101e1133911727")
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = FindLocationConfig.setup(api: client)
+        let navigationController = UINavigationController(rootViewController: FindLocationConfig.setup(api: client))
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
         UINavigationBar.appearance().barTintColor = .white

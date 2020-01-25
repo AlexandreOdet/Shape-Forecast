@@ -36,12 +36,6 @@
 		3689B235221C04CE00E50ED5 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3689B234221C04CE00E50ED5 /* Weather.swift */; };
 		3689B237221C05F300E50ED5 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3689B236221C05F300E50ED5 /* APIError.swift */; };
 		3689B23D221C0C7800E50ED5 /* DecodeResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3689B23C221C0C7800E50ED5 /* DecodeResource.swift */; };
-		52C7E7F323D8A04C00B8F3F9 /* DetailForecastConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7F223D8A04C00B8F3F9 /* DetailForecastConfig.swift */; };
-		52C7E7F523D8A06700B8F3F9 /* DetailForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7F423D8A06700B8F3F9 /* DetailForecastViewController.swift */; };
-		52C7E7F723D8A1B500B8F3F9 /* DetailForecastInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7F623D8A1B500B8F3F9 /* DetailForecastInteractor.swift */; };
-		52C7E7F923D8A21B00B8F3F9 /* DetailForecastRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7F823D8A21B00B8F3F9 /* DetailForecastRouter.swift */; };
-		52C7E7FC23D8A4C700B8F3F9 /* DetailForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C7E7FB23D8A4C700B8F3F9 /* DetailForecastPresenter.swift */; };
-		FA050B0E23DC748E006061DA /* FindLocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA050B0D23DC748E006061DA /* FindLocationAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,12 +124,6 @@
 		3689B234221C04CE00E50ED5 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		3689B236221C05F300E50ED5 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		3689B23C221C0C7800E50ED5 /* DecodeResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeResource.swift; sourceTree = "<group>"; };
-		52C7E7F223D8A04C00B8F3F9 /* DetailForecastConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastConfig.swift; sourceTree = "<group>"; };
-		52C7E7F423D8A06700B8F3F9 /* DetailForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastViewController.swift; sourceTree = "<group>"; };
-		52C7E7F623D8A1B500B8F3F9 /* DetailForecastInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastInteractor.swift; sourceTree = "<group>"; };
-		52C7E7F823D8A21B00B8F3F9 /* DetailForecastRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastRouter.swift; sourceTree = "<group>"; };
-		52C7E7FB23D8A4C700B8F3F9 /* DetailForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastPresenter.swift; sourceTree = "<group>"; };
-		FA050B0D23DC748E006061DA /* FindLocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindLocationAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +186,7 @@
 		3689B1CC221BE67C00E50ED5 /* forecast */ = {
 			isa = PBXGroup;
 			children = (
-				52C7E7F123D8A03900B8F3F9 /* DetailForecast */,
+				FA55975323DCADDE00AF7632 /* protocols */,
 				3689B1DF221BE73D00E50ED5 /* FindLocation */,
 				3689B1CD221BE67C00E50ED5 /* AppDelegate.swift */,
 				3689B1D1221BE67C00E50ED5 /* Main.storyboard */,
@@ -212,7 +200,6 @@
 		3689B1DF221BE73D00E50ED5 /* FindLocation */ = {
 			isa = PBXGroup;
 			children = (
-				FA050B0C23DC746E006061DA /* customAnnotation */,
 				52C7E7FD23D8A59700B8F3F9 /* Config */,
 				3689B1E4221BE8E500E50ED5 /* FindLocationViewController.swift */,
 				3689B1E6221BE8EE00E50ED5 /* FindLocationInteractor.swift */,
@@ -292,26 +279,6 @@
 			path = Endpoints;
 			sourceTree = "<group>";
 		};
-		52C7E7F123D8A03900B8F3F9 /* DetailForecast */ = {
-			isa = PBXGroup;
-			children = (
-				52C7E7FA23D8A4B100B8F3F9 /* Config */,
-				52C7E7F423D8A06700B8F3F9 /* DetailForecastViewController.swift */,
-				52C7E7F623D8A1B500B8F3F9 /* DetailForecastInteractor.swift */,
-				52C7E7F823D8A21B00B8F3F9 /* DetailForecastRouter.swift */,
-				52C7E7FB23D8A4C700B8F3F9 /* DetailForecastPresenter.swift */,
-			);
-			path = DetailForecast;
-			sourceTree = "<group>";
-		};
-		52C7E7FA23D8A4B100B8F3F9 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				52C7E7F223D8A04C00B8F3F9 /* DetailForecastConfig.swift */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		52C7E7FD23D8A59700B8F3F9 /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,12 +287,11 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		FA050B0C23DC746E006061DA /* customAnnotation */ = {
+		FA55975323DCADDE00AF7632 /* protocols */ = {
 			isa = PBXGroup;
 			children = (
-				FA050B0D23DC748E006061DA /* FindLocationAnnotation.swift */,
 			);
-			path = customAnnotation;
+			path = protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -521,17 +487,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52C7E7F723D8A1B500B8F3F9 /* DetailForecastInteractor.swift in Sources */,
 				3689B1E7221BE8EE00E50ED5 /* FindLocationInteractor.swift in Sources */,
-				52C7E7F923D8A21B00B8F3F9 /* DetailForecastRouter.swift in Sources */,
-				52C7E7F323D8A04C00B8F3F9 /* DetailForecastConfig.swift in Sources */,
-				FA050B0E23DC748E006061DA /* FindLocationAnnotation.swift in Sources */,
-				52C7E7FC23D8A4C700B8F3F9 /* DetailForecastPresenter.swift in Sources */,
 				3689B1E5221BE8E500E50ED5 /* FindLocationViewController.swift in Sources */,
 				3689B1EB221BE8FC00E50ED5 /* FindLocationPresenter.swift in Sources */,
 				3689B1E3221BE8DD00E50ED5 /* FindLocationConfig.swift in Sources */,
 				3689B1E9221BE8F500E50ED5 /* FindLocationRouter.swift in Sources */,
-				52C7E7F523D8A06700B8F3F9 /* DetailForecastViewController.swift in Sources */,
 				3689B1CE221BE67C00E50ED5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,7 +20,7 @@ struct FindLocationConfig {
         interactor.action = router
         interactor.output = presenter
         presenter.output = viewController
-        
+        router.viewController = viewController
         return viewController
     }
 }

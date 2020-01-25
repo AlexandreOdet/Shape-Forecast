@@ -10,7 +10,6 @@ import Foundation
 import MapKit
 
 protocol FindLocationPresenterOutput: class {
-    func addPoint(at coordinates: CLLocationCoordinate2D)
 }
 
 final class FindLocationPresenter {
@@ -18,7 +17,4 @@ final class FindLocationPresenter {
 }
 
 extension FindLocationPresenter: FindLocationInteractorOutput {
-    func addPoint(at coordinates: CLLocationCoordinate2D) {
-        output.addPoint(at: coordinates)
-    }
 }

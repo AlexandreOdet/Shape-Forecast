@@ -11,7 +11,6 @@ import MapKit
 
 protocol FindLocationViewControllerOutput: class {
     func viewIsReady()
-    func addPoint(at coordinate: CLLocationCoordinate2D)
     func locationSelected(at coordinate: CLLocationCoordinate2D)
 }
 
@@ -20,12 +19,11 @@ final class FindLocationViewController: UIViewController {
     private lazy var mapView: MKMapView = MKMapView(frame: .zero)
     
     var output: FindLocationViewControllerOutput!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(mapView)
-
         mapView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -37,7 +35,7 @@ final class FindLocationViewController: UIViewController {
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(findLocation(_:)))
         mapView.addGestureRecognizer(gesture)
-        
+
         output.viewIsReady()
     }
     
@@ -46,14 +44,9 @@ final class FindLocationViewController: UIViewController {
         let point = gesture.location(in: mapView)
         //Convert point into CLLocationCoordinate2D.
         let coordinates = mapView.convert(point, toCoordinateFrom: mapView)
-        output.addPoint(at: coordinates)
+        output.locationSelected(at: coordinates)
     }
 }
 
 extension FindLocationViewController: FindLocationPresenterOutput {
-    func addPoint(at coordinates: CLLocationCoordinate2D) {
-        //Add a point on a map with custom button to access detail forecast.
-        let annotation = FindLocationAnnotation(with: "", and: coordinates)
-        mapView.addAnnotation(annotation)
-    }
 }
