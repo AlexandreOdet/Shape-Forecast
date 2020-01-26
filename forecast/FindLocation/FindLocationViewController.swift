@@ -14,7 +14,7 @@ protocol FindLocationViewControllerOutput: class {
     func locationSelected(at coordinate: CLLocationCoordinate2D)
 }
 
-final class FindLocationViewController: UIViewController {
+final class FindLocationViewController: UIViewController, Reachable {
     
     private lazy var mapView: MKMapView = MKMapView(frame: .zero)
     

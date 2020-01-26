@@ -18,6 +18,14 @@ final class FindLocationRouter {
     init(api apiClient: ForecastClient) {
         self.api = apiClient
     }
+    
+    private func dismissPreviousAlertIfNeeded() {
+        DispatchQueue.main.async { //Can be called from a background thread, to avoid using UI in background, use DispatchQueue.main to switch back to main thread.
+            if self.viewController.presentedViewController != nil && self.viewController.presentedViewController is UIAlertController { //Remove previous alert if needed.
+                self.viewController.presentedViewController?.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 extension FindLocationRouter: FindLocationInteractorAction {
@@ -27,21 +35,17 @@ extension FindLocationRouter: FindLocationInteractorAction {
     }
     
     func weatherFecthDidFail() {
-        DispatchQueue.main.async { //Can be called from a background thread, to avoid using UI in background, use DispatchQueue.main to switch back to main thread.
-            if self.viewController.presentedViewController != nil && self.viewController.presentedViewController is UIAlertController { //Remove previous alert if needed.
-                self.viewController.dismiss(animated: true, completion: nil)
-            }
-            let alertController = UIAlertController(title: "Oops", message: "Something went wrong.\nWeather could not be fetched.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            
-        }
+        dismissPreviousAlertIfNeeded()
+        let alertController = UIAlertController(title: "Oops", message: "Something went wrong.\nWeather could not be fetched.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
     }
     
     func weatherFetched() {
-        DispatchQueue.main.async { //Can be called from a background thread, to avoid using UI in background, use DispatchQueue.main to switch back to main thread.
-            if self.viewController.presentedViewController != nil && self.viewController.presentedViewController is UIAlertController { //Remove previous alert if needed.
-                self.viewController.presentedViewController?.dismiss(animated: true, completion: nil)
-            }
-        }
+        dismissPreviousAlertIfNeeded()
+    }
+    
+    func connectivityNotAvailable() {
+        dismissPreviousAlertIfNeeded()
+        viewController.alertWhenNetworkNotAvailable()
     }
 }

@@ -17,10 +17,11 @@ protocol FindLocationInteractorAction: class {
     func locationSelected(at coordinate: CLLocationCoordinate2D)
     func weatherFecthDidFail()
     func weatherFetched()
+    func connectivityNotAvailable()
 }
 
 
-final class FindLocationInteractor {
+final class FindLocationInteractor: Reachable {
     var output: FindLocationInteractorOutput!
     var action: FindLocationInteractorAction!
     
@@ -39,6 +40,10 @@ extension FindLocationInteractor: FindLocationViewControllerOutput {
     
     func locationSelected(at coordinate: CLLocationCoordinate2D) {
         action.locationSelected(at: coordinate)
+        guard isReachable else {
+            action.connectivityNotAvailable()
+            return
+        }
         api.perform(CurrentWeather.getCurrent(for: coordinate.latitude, and: coordinate.longitude), completion: { result in
             if result.error != nil {
                 self.action.weatherFecthDidFail()
