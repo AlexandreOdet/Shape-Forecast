@@ -13,7 +13,7 @@ protocol DetailForecastPresenterOutput: class { //ViewController
 }
 
 final class DetailForecastPresenter {
-    
+    var output: DetailForecastPresenterOutput!
 }
 
 extension DetailForecastPresenter: DetailForecastInteractorOutput {

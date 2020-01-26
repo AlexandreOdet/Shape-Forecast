@@ -16,7 +16,7 @@ protocol FindLocationInteractorOutput: class {
 protocol FindLocationInteractorAction: class {
     func locationSelected(at coordinate: CLLocationCoordinate2D)
     func weatherFecthDidFail()
-    func weatherFetched()
+    func weatherFetched(_ weather: CurrentWeather)
     func connectivityNotAvailable()
 }
 
@@ -48,10 +48,11 @@ extension FindLocationInteractor: FindLocationViewControllerOutput {
             if result.error != nil {
                 self.action.weatherFecthDidFail()
             } else {
-                self.action.weatherFetched()
                 //Display weather
-                let weather = result.value!
-                print(weather.weather.first!)
+                DispatchQueue.main.async {
+                    let weather = result.value!
+                    self.action.weatherFetched(weather)
+                }
             }
             }).resume()
     }

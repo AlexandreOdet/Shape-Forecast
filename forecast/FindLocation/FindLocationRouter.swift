@@ -9,6 +9,7 @@
 
 import MapKit
 import API
+import Entities
 
 final class FindLocationRouter {
     let api: ForecastClient
@@ -40,8 +41,10 @@ extension FindLocationRouter: FindLocationInteractorAction {
         alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
     }
     
-    func weatherFetched() {
+    func weatherFetched(_ weather: CurrentWeather) {
         dismissPreviousAlertIfNeeded()
+        let nextViewController = DetailWeatherConfig.build(with: weather)
+        viewController.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     func connectivityNotAvailable() {

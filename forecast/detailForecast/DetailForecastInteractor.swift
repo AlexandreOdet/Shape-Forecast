@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Entities
 
 protocol DetailForecastInteractorOutput: class { //Presenter
     
@@ -17,7 +18,13 @@ protocol DetailForecastInteractorAction: class { //Router
 }
 
 final class DetailForecastInteractor {
-
+    var action: DetailForecastInteractorAction!
+    var output: DetailForecastInteractorOutput!
+    
+    private var currentWeather: CurrentWeather
+    init(with weather: CurrentWeather) {
+        self.currentWeather = weather
+    }
 }
 
 extension DetailForecastInteractor: DetailForecastViewControllerOutput {

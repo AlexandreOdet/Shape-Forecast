@@ -10,7 +10,17 @@ import Foundation
 import Entities
 
 struct DetailWeatherConfig {
-    static func build(with weather: Weather) -> UIViewController {
-        return UIViewController()
+    static func build(with weather: CurrentWeather) -> UIViewController {
+        let viewController = DetailForecastViewController()
+        let router = DetailForecastRouter()
+        let presenter = DetailForecastPresenter()
+        let interactor = DetailForecastInteractor(with: weather)
+        
+        viewController.output = interactor
+        interactor.action = router
+        interactor.output = presenter
+        presenter.output = viewController
+        router.viewController = viewController
+        return viewController
     }
 }

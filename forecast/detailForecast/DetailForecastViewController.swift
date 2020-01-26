@@ -14,7 +14,7 @@ protocol DetailForecastViewControllerOutput: class {
 }
 
 final class DetailForecastViewController: UIViewController {
-
+    var output: DetailForecastViewControllerOutput!
 }
 
 extension DetailForecastViewController: DetailForecastPresenterOutput {
