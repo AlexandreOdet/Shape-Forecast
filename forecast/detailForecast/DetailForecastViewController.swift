@@ -17,10 +17,16 @@ protocol DetailForecastViewControllerOutput: class {
 final class DetailForecastViewController: UIViewController {
     var output: DetailForecastViewControllerOutput!
     
+    private lazy var backgroundView = UIImageView(frame: .zero)
+
+    //Current Weather
     private lazy var cityNameLabel = UILabel(frame: .zero)
     private lazy var currentWeatherLabel = UILabel(frame: .zero)
     private lazy var currentTemperatureLabel = UILabel(frame: .zero)
-    private lazy var backgroundView = UIImageView(frame: .zero)
+    private lazy var todayLabel = UILabel(frame: .zero)
+    private lazy var maxTemperatureLabel = UILabel(frame: .zero)
+    private lazy var minTemperatureLabel = UILabel(frame: .zero)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +35,13 @@ final class DetailForecastViewController: UIViewController {
     }
     
     private func setUp() {
-        view.addSubview(backgroundView)
-        
-        view.addSubview(cityNameLabel)
-        view.addSubview(currentWeatherLabel)
-        view.addSubview(currentTemperatureLabel)
-        
-        setUpLabels()
         setUpBackgroundView()
+        setUpWeatherLabels()
+        setUpTodayTemperatureLabels()
     }
     
     private func setUpBackgroundView() {
+        view.addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.contentMode = .scaleAspectFill
         NSLayoutConstraint.activate([
@@ -50,7 +52,11 @@ final class DetailForecastViewController: UIViewController {
         ])
     }
     
-    private func setUpLabels() {
+    private func setUpWeatherLabels() {
+        view.addSubview(cityNameLabel)
+        view.addSubview(currentWeatherLabel)
+        view.addSubview(currentTemperatureLabel)
+        
         cityNameLabel.translatesAutoresizingMaskIntoConstraints = false
         currentWeatherLabel.translatesAutoresizingMaskIntoConstraints = false
         currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -81,9 +87,37 @@ final class DetailForecastViewController: UIViewController {
             currentTemperatureLabel.centerXAnchor.constraint(equalTo: currentWeatherLabel.centerXAnchor)
         ])
     }
+    
+    private func setUpTodayTemperatureLabels() {
+        view.addSubview(todayLabel)
+        view.addSubview(maxTemperatureLabel)
+        view.addSubview(minTemperatureLabel)
+        
+        todayLabel.textColor = .white
+        todayLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        todayLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        maxTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+        maxTemperatureLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        maxTemperatureLabel.textColor = .white
+
+        minTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+        minTemperatureLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        minTemperatureLabel.textColor = .lightGray
+        
+        
+        NSLayoutConstraint.activate([
+            todayLabel.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 40),
+            todayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15)
+        ])
+    }
 }
 
 extension DetailForecastViewController: DetailForecastPresenterOutput {
+    func displayTodayDate() {
+        todayLabel.text = "\(DateUtils.getFormattedDayName())\tTODAY"
+    }
+    
     func display(cityName: String) {
         cityNameLabel.text = cityName
     }

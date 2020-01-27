@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import Entities
 
 protocol DetailForecastPresenterOutput: class { //ViewController
     func display(temperature: Double)
     func display(cityName: String)
     func display(weather: String)
     func set(backgroundViewWith weather: Weather)
+    func displayTodayDate()
 }
 
 final class DetailForecastPresenter {
@@ -20,21 +22,14 @@ final class DetailForecastPresenter {
 }
 
 extension DetailForecastPresenter: DetailForecastInteractorOutput {
-    func display(temperature: Double) {
-        let celsiusTemp = Temperature.kelvinToCelsius(temperature)
+    func display(_ currentWeather: CurrentWeather) {
+        let celsiusTemp = Temperature.kelvinToCelsius(currentWeather.infos.temp)
         output.display(temperature: celsiusTemp)
-    }
-    
-    func display(cityName: String) {
-        output.display(cityName: cityName)
-    }
-    
-    func display(weather: String) {
-        output.display(weather: weather)
-    }
-    
-    func add(backgroundViewWith weather: Weather) {
+        output.display(cityName: currentWeather.name)
+        output.displayTodayDate()
+        output.display(weather: currentWeather.weather.first!.main)
+        
+        let weather = Weather(with: currentWeather.weather.first!.id)
         output.set(backgroundViewWith: weather)
-    }
-    
+    }    
 }
