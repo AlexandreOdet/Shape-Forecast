@@ -11,6 +11,7 @@ import API
 import Entities
 
 protocol FindLocationInteractorOutput: class {
+    func blurView()
 }
 
 protocol FindLocationInteractorAction: class {
@@ -40,6 +41,7 @@ extension FindLocationInteractor: FindLocationViewControllerOutput {
     
     func locationSelected(at coordinate: CLLocationCoordinate2D) {
         action.locationSelected(at: coordinate)
+        output.blurView()
         guard isReachable else {
             action.connectivityNotAvailable()
             return

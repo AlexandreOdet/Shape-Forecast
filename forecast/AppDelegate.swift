@@ -19,8 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let client = ForecastClient(appId: "2d59b6f6fd3b090e08101e1133911727")
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let navigationController = UINavigationController(rootViewController: FindLocationConfig.setup(api: client))
-        window?.rootViewController = navigationController
+        window?.rootViewController = FindLocationConfig.setup(api: client)
         window?.makeKeyAndVisible()
         
         UINavigationBar.appearance().barTintColor = .white

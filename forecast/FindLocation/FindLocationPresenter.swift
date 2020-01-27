@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 
 protocol FindLocationPresenterOutput: class {
+    func blurView()
 }
 
 final class FindLocationPresenter {
@@ -17,4 +18,7 @@ final class FindLocationPresenter {
 }
 
 extension FindLocationPresenter: FindLocationInteractorOutput {
+    func blurView() {
+        output.blurView()
+    }
 }

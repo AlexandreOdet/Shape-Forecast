@@ -20,10 +20,10 @@ final class FindLocationRouter {
         self.api = apiClient
     }
     
-    private func dismissPreviousAlertIfNeeded() {
-        DispatchQueue.main.async { //Can be called from a background thread, to avoid using UI in background, use DispatchQueue.main to switch back to main thread.
+    private func dismissPreviousAlertIfNeeded(withCompletion completion: (() -> ())? = nil) {
+        DispatchQueue.main.async {
             if self.viewController.presentedViewController != nil && self.viewController.presentedViewController is UIAlertController { //Remove previous alert if needed.
-                self.viewController.presentedViewController?.dismiss(animated: true, completion: nil)
+                self.viewController.presentedViewController?.dismiss(animated: true, completion: completion)
             }
         }
     }
@@ -36,19 +36,23 @@ extension FindLocationRouter: FindLocationInteractorAction {
     }
     
     func weatherFecthDidFail() {
-        dismissPreviousAlertIfNeeded()
-        let alertController = UIAlertController(title: "Oops", message: "Something went wrong.\nWeather could not be fetched.", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        dismissPreviousAlertIfNeeded(withCompletion: {
+            let alertController = UIAlertController(title: "Oops", message: "Something went wrong.\nWeather could not be fetched.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.viewController.present(alertController, animated: true)
+        })
     }
     
     func weatherFetched(_ weather: CurrentWeather) {
-        dismissPreviousAlertIfNeeded()
-        let nextViewController = DetailWeatherConfig.build(with: weather)
-        viewController.navigationController?.pushViewController(nextViewController, animated: true)
+        dismissPreviousAlertIfNeeded(withCompletion: {
+            let nextViewController = DetailWeatherConfig.build(with: weather)
+            self.viewController.present(nextViewController, animated: true, completion: nil)
+        })
     }
     
     func connectivityNotAvailable() {
-        dismissPreviousAlertIfNeeded()
-        viewController.alertWhenNetworkNotAvailable()
+        self.dismissPreviousAlertIfNeeded(withCompletion: {
+            self.viewController.alertWhenNetworkNotAvailable()
+        })
     }
 }

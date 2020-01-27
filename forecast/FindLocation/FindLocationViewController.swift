@@ -49,4 +49,11 @@ final class FindLocationViewController: UIViewController, Reachable {
 }
 
 extension FindLocationViewController: FindLocationPresenterOutput {
+    func blurView() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+    }
 }
