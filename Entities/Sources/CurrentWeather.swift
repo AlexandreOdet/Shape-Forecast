@@ -30,7 +30,7 @@ public struct Coordinates: Codable {
 }
 
 public struct Weather: Codable {
-    let id: Int
+    public let id: Int
     public let main: String
     public let description: String
     public let icon: String

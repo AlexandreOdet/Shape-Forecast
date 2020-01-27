@@ -11,6 +11,8 @@ import Foundation
 protocol DetailForecastPresenterOutput: class { //ViewController
     func display(temperature: Double)
     func display(cityName: String)
+    func display(weather: String)
+    func set(backgroundViewWith weather: Weather)
 }
 
 final class DetailForecastPresenter {
@@ -25,6 +27,14 @@ extension DetailForecastPresenter: DetailForecastInteractorOutput {
     
     func display(cityName: String) {
         output.display(cityName: cityName)
+    }
+    
+    func display(weather: String) {
+        output.display(weather: weather)
+    }
+    
+    func add(backgroundViewWith weather: Weather) {
+        output.set(backgroundViewWith: weather)
     }
     
 }

@@ -37,6 +37,8 @@
 		3689B237221C05F300E50ED5 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3689B236221C05F300E50ED5 /* APIError.swift */; };
 		3689B23D221C0C7800E50ED5 /* DecodeResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3689B23C221C0C7800E50ED5 /* DecodeResource.swift */; };
 		52BD156723DEF4BE007A68C3 /* TemperatureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD156623DEF4BE007A68C3 /* TemperatureUtils.swift */; };
+		FA780B9423DF41F5006E8B7F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA780B9323DF41F5006E8B7F /* UIImageViewExtension.swift */; };
+		FA780B9923DF475E006E8B7F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA780B9823DF475E006E8B7F /* Weather.swift */; };
 		FA8CAF4A23DD903E00D28B0A /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CAF4923DD903E00D28B0A /* Reachable.swift */; };
 		FA8CAF4E23DD968600D28B0A /* DetailWeatherConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CAF4D23DD968600D28B0A /* DetailWeatherConfig.swift */; };
 		FA8CAF5023DDC5AC00D28B0A /* DetailForecastRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CAF4F23DDC5AC00D28B0A /* DetailForecastRouter.swift */; };
@@ -132,6 +134,8 @@
 		3689B236221C05F300E50ED5 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		3689B23C221C0C7800E50ED5 /* DecodeResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeResource.swift; sourceTree = "<group>"; };
 		52BD156623DEF4BE007A68C3 /* TemperatureUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUtils.swift; sourceTree = "<group>"; };
+		FA780B9323DF41F5006E8B7F /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		FA780B9823DF475E006E8B7F /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		FA8CAF4923DD903E00D28B0A /* Reachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
 		FA8CAF4D23DD968600D28B0A /* DetailWeatherConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherConfig.swift; sourceTree = "<group>"; };
 		FA8CAF4F23DDC5AC00D28B0A /* DetailForecastRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastRouter.swift; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 		3689B1CC221BE67C00E50ED5 /* forecast */ = {
 			isa = PBXGroup;
 			children = (
+				FA780B9723DF474C006E8B7F /* Enums */,
+				FA780B9223DF41DD006E8B7F /* Extension */,
 				52BD156523DEF46C007A68C3 /* Utils */,
 				FA8CAF4B23DD954100D28B0A /* detailForecast */,
 				FA55975323DCADDE00AF7632 /* protocols */,
@@ -317,6 +323,22 @@
 				FA8CAF4923DD903E00D28B0A /* Reachable.swift */,
 			);
 			path = protocols;
+			sourceTree = "<group>";
+		};
+		FA780B9223DF41DD006E8B7F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FA780B9323DF41F5006E8B7F /* UIImageViewExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		FA780B9723DF474C006E8B7F /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				FA780B9823DF475E006E8B7F /* Weather.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		FA8CAF4B23DD954100D28B0A /* detailForecast */ = {
@@ -536,10 +558,12 @@
 				FA8CAF5023DDC5AC00D28B0A /* DetailForecastRouter.swift in Sources */,
 				3689B1E7221BE8EE00E50ED5 /* FindLocationInteractor.swift in Sources */,
 				3689B1E5221BE8E500E50ED5 /* FindLocationViewController.swift in Sources */,
+				FA780B9923DF475E006E8B7F /* Weather.swift in Sources */,
 				3689B1EB221BE8FC00E50ED5 /* FindLocationPresenter.swift in Sources */,
 				3689B1E3221BE8DD00E50ED5 /* FindLocationConfig.swift in Sources */,
 				FA8CAF5623DDC8C800D28B0A /* DetailForecastViewController.swift in Sources */,
 				FA8CAF4E23DD968600D28B0A /* DetailWeatherConfig.swift in Sources */,
+				FA780B9423DF41F5006E8B7F /* UIImageViewExtension.swift in Sources */,
 				3689B1E9221BE8F500E50ED5 /* FindLocationRouter.swift in Sources */,
 				FA8CAF5223DDC88E00D28B0A /* DetailForecastPresenter.swift in Sources */,
 				52BD156723DEF4BE007A68C3 /* TemperatureUtils.swift in Sources */,
@@ -753,7 +777,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X9JS566X53;
+				DEVELOPMENT_TEAM = 245FL8M245;
 				INFOPLIST_FILE = forecast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -774,7 +798,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X9JS566X53;
+				DEVELOPMENT_TEAM = 245FL8M245;
 				INFOPLIST_FILE = forecast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
