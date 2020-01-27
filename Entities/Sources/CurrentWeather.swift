@@ -15,6 +15,9 @@ public struct CurrentWeather: Codable {
         case coordinates = "coord"
         case weather
         case infos = "main"
+        case wind
+        case clouds
+        case system = "sys"
     }
     
     public let date: Date
@@ -22,6 +25,9 @@ public struct CurrentWeather: Codable {
     public let coordinates: Coordinates
     public let weather: [Weather]
     public let infos: Infos
+    public let wind: Wind
+    public let clouds: Cloud
+    public let system: System
 }
 
 public struct Coordinates: Codable {
@@ -54,27 +60,25 @@ public struct Infos: Codable {
     public let humidity: Int
 }
 
-/*
- {
-   "wind": {
-     "speed": 0.47,
-     "deg": 107.538
-   },
-   "clouds": {
-     "all": 2
-   },
-   "dt": 1560350192,
-   "sys": {
-     "type": 3,
-     "id": 2019346,
-     "message": 0.0065,
-     "country": "JP",
-     "sunrise": 1560281377,
-     "sunset": 1560333478
-   },
-   "timezone": 32400,
-   "id": 1851632,
-   "name": "Shuzenji",
-   "cod": 200
- }
- */
+public struct Wind: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case speed
+        case degree = "deg"
+    }
+    public let speed: Double
+    public let degree: Double
+}
+
+public struct Cloud: Codable {
+    public let all: Int
+}
+
+public struct System: Codable {
+    public let type: Int
+    let id: Int
+    let message: Double
+    let country: String
+    public let sunrise: Date
+    public let sunset: Date
+}

@@ -15,6 +15,8 @@ protocol DetailForecastPresenterOutput: class { //ViewController
     func display(weather: String)
     func set(backgroundViewWith weather: Weather)
     func displayTodayDate()
+    func display(minTemp: Double)
+    func display(maxTemp: Double)
 }
 
 final class DetailForecastPresenter {
@@ -31,5 +33,7 @@ extension DetailForecastPresenter: DetailForecastInteractorOutput {
         
         let weather = Weather(with: currentWeather.weather.first!.id)
         output.set(backgroundViewWith: weather)
-    }    
+        output.display(minTemp: Temperature.kelvinToCelsius(currentWeather.infos.tempMin))
+        output.display(maxTemp: Temperature.kelvinToCelsius(currentWeather.infos.tempMax))
+    }
 }

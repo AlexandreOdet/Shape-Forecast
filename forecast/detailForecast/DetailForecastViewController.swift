@@ -108,7 +108,13 @@ final class DetailForecastViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             todayLabel.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 40),
-            todayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15)
+            todayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            
+            minTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            minTemperatureLabel.topAnchor.constraint(equalTo: todayLabel.topAnchor),
+            
+            maxTemperatureLabel.trailingAnchor.constraint(equalTo: minTemperatureLabel.leadingAnchor, constant: -20),
+            maxTemperatureLabel.topAnchor.constraint(equalTo: minTemperatureLabel.topAnchor)
         ])
     }
 }
@@ -134,5 +140,15 @@ extension DetailForecastViewController: DetailForecastPresenterOutput {
     func set(backgroundViewWith weather: Weather) {
         backgroundView.alpha = 0.5
         backgroundView.image = weather.backgroundView
+    }
+    
+    func display(minTemp: Double) {
+        let formattedTemperature = String(format: "%.0f", minTemp)
+        minTemperatureLabel.text = formattedTemperature
+    }
+    
+    func display(maxTemp: Double) {
+        let formattedTemperature = String(format: "%.0f", maxTemp)
+        maxTemperatureLabel.text = formattedTemperature
     }
 }
