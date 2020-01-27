@@ -15,6 +15,10 @@ protocol DetailForecastViewControllerOutput: class {
 
 final class DetailForecastViewController: UIViewController {
     var output: DetailForecastViewControllerOutput!
+    
+    private let cityNameLabel = UILabel()
+    private let currentWeatherLabel = UILabel()
+    private let currentTemperatureLabel = UILabel()
 }
 
 extension DetailForecastViewController: DetailForecastPresenterOutput {

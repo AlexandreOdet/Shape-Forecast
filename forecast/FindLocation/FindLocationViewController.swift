@@ -39,6 +39,15 @@ final class FindLocationViewController: UIViewController, Reachable {
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        for subview in view.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
+    }
+    
     @objc
     private func findLocation(_ gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: mapView)
@@ -49,6 +58,12 @@ final class FindLocationViewController: UIViewController, Reachable {
 }
 
 extension FindLocationViewController: FindLocationPresenterOutput {
+    func addAnnotation(at coordinate: CLLocationCoordinate2D) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
+    }
+    
     func blurView() {
         let blurEffect = UIBlurEffect(style: .regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)

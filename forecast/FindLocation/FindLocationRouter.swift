@@ -32,7 +32,7 @@ final class FindLocationRouter {
 extension FindLocationRouter: FindLocationInteractorAction {
     func locationSelected(at coordinate: CLLocationCoordinate2D) {
         let alertController = UIAlertController(title: nil, message: "Weather is loading...", preferredStyle: .alert)
-        viewController.present(alertController, animated: true, completion: nil)
+        viewController.present(alertController, animated: true)
     }
     
     func weatherFecthDidFail() {
@@ -46,7 +46,8 @@ extension FindLocationRouter: FindLocationInteractorAction {
     func weatherFetched(_ weather: CurrentWeather) {
         dismissPreviousAlertIfNeeded(withCompletion: {
             let nextViewController = DetailWeatherConfig.build(with: weather)
-            self.viewController.present(nextViewController, animated: true, completion: nil)
+            nextViewController.modalPresentationStyle = .overFullScreen
+            self.viewController.present(nextViewController, animated: true)
         })
     }
     
