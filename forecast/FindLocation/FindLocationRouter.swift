@@ -43,10 +43,10 @@ extension FindLocationRouter: FindLocationInteractorAction {
         })
     }
     
-    func weatherFetched(_ weather: CurrentWeather) {
+    func routeToDetail(_ weather: CurrentWeather) {
         dismissPreviousAlertIfNeeded(withCompletion: {
             let nextViewController = DetailWeatherConfig.build(with: weather)
-            nextViewController.modalPresentationStyle = .overFullScreen
+            nextViewController.modalPresentationStyle = .fullScreen
             self.viewController.present(nextViewController, animated: true)
         })
     }

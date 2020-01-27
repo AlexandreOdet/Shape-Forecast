@@ -10,7 +10,8 @@ import Foundation
 import Entities
 
 protocol DetailForecastInteractorOutput: class { //Presenter
-    
+    func display(temperature: Double)
+    func display(cityName: String)
 }
 
 protocol DetailForecastInteractorAction: class { //Router
@@ -28,5 +29,12 @@ final class DetailForecastInteractor {
 }
 
 extension DetailForecastInteractor: DetailForecastViewControllerOutput {
-
+    func viewDidLoad() {
+        output.display(cityName: currentWeather.name)
+        output.display(temperature: currentWeather.infos.temp)
+    }
+    
+    func didClickCloseButton() {
+        
+    }
 }

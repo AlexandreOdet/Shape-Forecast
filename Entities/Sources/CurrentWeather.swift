@@ -31,9 +31,9 @@ public struct Coordinates: Codable {
 
 public struct Weather: Codable {
     let id: Int
-    let main: String
-    let description: String
-    let icon: String
+    public let main: String
+    public let description: String
+    public let icon: String
 }
 
 public struct Infos: Codable {
@@ -46,12 +46,12 @@ public struct Infos: Codable {
         case humidity
     }
     
-    let temp: Double
-    let feelsLike: Double
-    let tempMin: Double
-    let tempMax: Double
-    let pressure: Int
-    let humidity: Int
+    public let temp: Double
+    public let feelsLike: Double
+    public let tempMin: Double
+    public let tempMax: Double
+    public let pressure: Int
+    public let humidity: Int
 }
 
 /*
