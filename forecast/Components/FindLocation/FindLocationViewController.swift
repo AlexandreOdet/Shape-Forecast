@@ -42,6 +42,7 @@ final class FindLocationViewController: UIViewController, Reachable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         unblurView()
+        mapView.removeAnnotations(mapView.annotations)
     }
     
     @objc

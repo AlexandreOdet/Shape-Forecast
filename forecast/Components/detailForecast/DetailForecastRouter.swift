@@ -23,7 +23,7 @@ extension DetailForecastRouter: DetailForecastInteractorAction {
     }
     
     func didClickCloseButton() {
-        viewController.dismiss(animated: false, completion: nil)
+        viewController.dismiss(animated: true, completion: nil)
     }
     
 

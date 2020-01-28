@@ -54,6 +54,6 @@ extension DetailForecastInteractor: DetailForecastViewControllerOutput {
     }
     
     func didClickCloseButton() {
-        
+        action.didClickCloseButton()
     }
 }

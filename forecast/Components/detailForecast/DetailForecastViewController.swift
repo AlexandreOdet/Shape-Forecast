@@ -25,6 +25,9 @@ fileprivate enum tableViewSection: CaseIterable {
 final class DetailForecastViewController: UIViewController {
     var output: DetailForecastViewControllerOutput!
     
+    private lazy var closeButton = UIButton()
+    
+    //Background View
     private lazy var backgroundView = UIImageView(frame: .zero)
     
     //Current Weather
@@ -81,10 +84,26 @@ final class DetailForecastViewController: UIViewController {
     
     private func setUp() {
         setUpBackgroundView()
+        setUpCloseButton() //For view hierarchy we want to have background at the deepest level
         setUpWeatherLabels()
         setUpTodayTemperatureLabels()
         setUpCollectionView()
         setUpTableView()
+    }
+    
+    private func setUpCloseButton() {
+        view.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.addTarget(self, action: #selector(didClickCloseButton), for: .touchUpInside)
+        
+        closeButton.setImage(UIImage(named: "close"), for: .normal)
+        
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
+            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            closeButton.widthAnchor.constraint(equalToConstant: 24),
+            closeButton.heightAnchor.constraint(equalToConstant: 24)
+        ])
     }
     
     private func setUpBackgroundView() {
@@ -256,7 +275,7 @@ final class DetailForecastViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            bottomBorder.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            bottomBorder.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70),
             bottomBorder.widthAnchor.constraint(equalTo: view.widthAnchor),
             bottomBorder.heightAnchor.constraint(equalToConstant: 1),
             
@@ -272,6 +291,12 @@ final class DetailForecastViewController: UIViewController {
             cell.backgroundColor = .clear
             return cell
         })
+    }
+    
+    // MARK: - Event
+    
+    @objc func didClickCloseButton() {
+        output.didClickCloseButton()
     }
 }
 
