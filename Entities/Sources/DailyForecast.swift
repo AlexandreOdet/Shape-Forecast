@@ -12,8 +12,8 @@ public struct DailyForecast: Codable {
     let cod: String
     let message: Double
     let cnt: Int
-    let list: [List]
-    let city: City
+    public let list: [List]
+    public let city: City
 }
 
 // MARK: - City
@@ -32,11 +32,11 @@ public struct Coord: Codable {
 
 // MARK: - List
 public struct List: Codable {
-    let dt: Int
-    let main: Main
-    let weather: [Weather]
-    let clouds: Cloud
-    let wind: Wind
+    public let dt: Int
+    public let main: Main
+    public let weather: [Weather]
+    public let clouds: Cloud
+    public let wind: Wind
     let dtTxt: String
 
     enum CodingKeys: String, CodingKey {
@@ -47,7 +47,7 @@ public struct List: Codable {
 
 // MARK: - Main
 public struct Main: Codable {
-    let temp, feelsLike, tempMin, tempMax: Double
+    public let temp, feelsLike, tempMin, tempMax: Double
     let pressure, seaLevel, grndLevel, humidity: Int
     let tempKf: Double
 

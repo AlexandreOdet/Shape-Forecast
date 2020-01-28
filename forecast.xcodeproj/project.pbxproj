@@ -42,6 +42,7 @@
 		52EAA59923E0128B00C409EC /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EAA59823E0128B00C409EC /* Wind.swift */; };
 		52EAA59B23E012BA00C409EC /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EAA59A23E012BA00C409EC /* Forecast.swift */; };
 		52EAA59D23E0147700C409EC /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EAA59C23E0147700C409EC /* Cloud.swift */; };
+		52F74D9823E047AE004F63F6 /* ListBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F74D9723E047AE004F63F6 /* ListBusiness.swift */; };
 		FA780B9923DF475E006E8B7F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA780B9823DF475E006E8B7F /* Weather.swift */; };
 		FA780B9B23DF5174006E8B7F /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA780B9A23DF5174006E8B7F /* DateUtils.swift */; };
 		FA8CAF4A23DD903E00D28B0A /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CAF4923DD903E00D28B0A /* Reachable.swift */; };
@@ -144,6 +145,7 @@
 		52EAA59823E0128B00C409EC /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		52EAA59A23E012BA00C409EC /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		52EAA59C23E0147700C409EC /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
+		52F74D9723E047AE004F63F6 /* ListBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBusiness.swift; sourceTree = "<group>"; };
 		FA780B9823DF475E006E8B7F /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		FA780B9A23DF5174006E8B7F /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		FA8CAF4923DD903E00D28B0A /* Reachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
@@ -340,6 +342,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		52F74D9623E046F6004F63F6 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				52F74D9723E047AE004F63F6 /* ListBusiness.swift */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
 		FA55975323DCADDE00AF7632 /* protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +369,7 @@
 		FA8CAF4B23DD954100D28B0A /* detailForecast */ = {
 			isa = PBXGroup;
 			children = (
+				52F74D9623E046F6004F63F6 /* Business */,
 				FA8CAF4C23DD967100D28B0A /* Config */,
 				FA8CAF4F23DDC5AC00D28B0A /* DetailForecastRouter.swift */,
 				FA8CAF5123DDC88E00D28B0A /* DetailForecastPresenter.swift */,
@@ -574,6 +585,7 @@
 				3689B1E7221BE8EE00E50ED5 /* FindLocationInteractor.swift in Sources */,
 				3689B1E5221BE8E500E50ED5 /* FindLocationViewController.swift in Sources */,
 				FA780B9923DF475E006E8B7F /* Weather.swift in Sources */,
+				52F74D9823E047AE004F63F6 /* ListBusiness.swift in Sources */,
 				3689B1EB221BE8FC00E50ED5 /* FindLocationPresenter.swift in Sources */,
 				3689B1E3221BE8DD00E50ED5 /* FindLocationConfig.swift in Sources */,
 				FA780B9B23DF5174006E8B7F /* DateUtils.swift in Sources */,

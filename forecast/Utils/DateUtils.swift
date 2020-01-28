@@ -18,7 +18,11 @@ final class DateUtils {
         return dateFormatter
     }()
     
-    public class func getFormattedDayName() -> String {
-        return dateFormatter.string(from: Date())
+    public class func getFormattedDayName(from date: Date = Date()) -> String {
+        return dateFormatter.string(from: date)
+    }
+    
+    public class func isDateInToday(_ date: Date) -> Bool {
+        return Calendar.current.isDateInToday(date)
     }
 }

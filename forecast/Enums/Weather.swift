@@ -48,4 +48,19 @@ enum Weather {
         }
     }
     
+    var icon: UIImage {
+        switch self {
+        case .thunderstorm:
+            return UIImage(named: "thunder-icon")!
+        case .rain:
+            return UIImage(named: "rain-icon")!
+        case .snow:
+            return UIImage(named: "snow-icon")!
+        case .clear:
+            return UIImage(named: "sun-icon")!
+        case .cloudy:
+            return UIImage(named: "cloudy-icon")!
+        }
+    }
+    
 }

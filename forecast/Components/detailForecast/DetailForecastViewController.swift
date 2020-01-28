@@ -14,6 +14,10 @@ protocol DetailForecastViewControllerOutput: class {
     func didClickCloseButton()
 }
 
+fileprivate enum collectionViewSection: CaseIterable {
+    case main
+}
+
 final class DetailForecastViewController: UIViewController {
     var output: DetailForecastViewControllerOutput!
     
@@ -27,6 +31,16 @@ final class DetailForecastViewController: UIViewController {
     private lazy var maxTemperatureLabel = UILabel(frame: .zero)
     private lazy var minTemperatureLabel = UILabel(frame: .zero)
     
+    private lazy var collectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width / 5, height: 60)
+        let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: flowLayout)
+        return collectionView
+    }()
+    
+    @available(iOS 13.0, *)
+    private lazy var collectionViewDataSource = setUpCollectionViewDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +52,7 @@ final class DetailForecastViewController: UIViewController {
         setUpBackgroundView()
         setUpWeatherLabels()
         setUpTodayTemperatureLabels()
+        setUpCollectionView()
     }
     
     private func setUpBackgroundView() {
@@ -117,6 +132,29 @@ final class DetailForecastViewController: UIViewController {
             maxTemperatureLabel.topAnchor.constraint(equalTo: minTemperatureLabel.topAnchor)
         ])
     }
+    
+    private func setUpCollectionView() {
+        view.addSubview(collectionView)
+        
+        collectionView.delegate = self
+        if #available(iOS 13.0, *) {
+            collectionView.dataSource = collectionViewDataSource
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    private func setUpCollectionViewDataSource() -> UICollectionViewDiffableDataSource<ListBusiness, collectionViewSection> {
+        return UICollectionViewDiffableDataSource(collectionView: self.collectionView,
+                                                  cellProvider: { collectionView, indexPath, object in
+                                    return UICollectionViewCell()
+        })
+    }
+}
+
+extension DetailForecastViewController: UICollectionViewDelegate {
+    
 }
 
 extension DetailForecastViewController: DetailForecastPresenterOutput {
