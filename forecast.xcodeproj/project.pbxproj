@@ -214,11 +214,10 @@
 		3689B1CC221BE67C00E50ED5 /* forecast */ = {
 			isa = PBXGroup;
 			children = (
+				52EAA59E23E03D3000C409EC /* Components */,
 				FA780B9723DF474C006E8B7F /* Enums */,
 				52BD156523DEF46C007A68C3 /* Utils */,
-				FA8CAF4B23DD954100D28B0A /* detailForecast */,
 				FA55975323DCADDE00AF7632 /* protocols */,
-				3689B1DF221BE73D00E50ED5 /* FindLocation */,
 				3689B1CD221BE67C00E50ED5 /* AppDelegate.swift */,
 				3689B1D1221BE67C00E50ED5 /* Main.storyboard */,
 				3689B1D4221BE67E00E50ED5 /* Assets.xcassets */,
@@ -330,6 +329,15 @@
 				3689B1E2221BE8DD00E50ED5 /* FindLocationConfig.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		52EAA59E23E03D3000C409EC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FA8CAF4B23DD954100D28B0A /* detailForecast */,
+				3689B1DF221BE73D00E50ED5 /* FindLocation */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		FA55975323DCADDE00AF7632 /* protocols */ = {

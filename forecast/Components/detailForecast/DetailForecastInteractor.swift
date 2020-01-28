@@ -15,7 +15,8 @@ protocol DetailForecastInteractorOutput: class { //Presenter
 }
 
 protocol DetailForecastInteractorAction: class { //Router
-
+    func displayErrorAlert()
+    func didClickCloseButton()
 }
 
 final class DetailForecastInteractor {
