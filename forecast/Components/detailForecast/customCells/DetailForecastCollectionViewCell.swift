@@ -49,6 +49,8 @@ final class DetailForecastCollectionViewCell: UICollectionViewCell {
         
         if isNow {
             hourLabel.text = "Now"
+            hourLabel.font = UIFont.boldSystemFont(ofSize: hourLabel.font.pointSize)
+            temperatureLabel.font = UIFont.boldSystemFont(ofSize: temperatureLabel.font.pointSize)
         } else {
             let date = Date(timeIntervalSince1970: TimeInterval(item.date))
             hourLabel.text = DateUtils.getHour(from: date) + "h"

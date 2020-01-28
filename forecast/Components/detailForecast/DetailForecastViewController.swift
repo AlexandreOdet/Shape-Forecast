@@ -18,11 +18,15 @@ fileprivate enum collectionViewSection: CaseIterable {
     case main
 }
 
+fileprivate enum tableViewSection: CaseIterable {
+    case main
+}
+
 final class DetailForecastViewController: UIViewController {
     var output: DetailForecastViewControllerOutput!
     
     private lazy var backgroundView = UIImageView(frame: .zero)
-
+    
     //Current Weather
     private lazy var cityNameLabel = UILabel(frame: .zero)
     private lazy var currentWeatherLabel = UILabel(frame: .zero)
@@ -42,7 +46,7 @@ final class DetailForecastViewController: UIViewController {
         return collectionView
     }()
     
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, *) //Create diffableDataSource if possible
     private lazy var collectionViewDataSource = setUpCollectionViewDataSource()
     
     private var items = [ListBusiness]() {
@@ -54,9 +58,20 @@ final class DetailForecastViewController: UIViewController {
     //5 days forecast
     private let tableViewCellReuseIdentifier = "fiveDayForecastCell"
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: view.frame, style: .grouped)
+        let tableView = UITableView(frame: view.frame, style: .plain)
+        tableView.register(FiveDaysForecastTableViewCell.self, forCellReuseIdentifier: tableViewCellReuseIdentifier)
+        tableView.backgroundColor = .clear
         return tableView
     }()
+    
+    @available(iOS 13.0, *) //Create diffableDataSource if possible
+    private lazy var tableViewDataSource = setUpTableViewDataSource()
+    
+    private var forecastItems = [ListBusiness]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +84,7 @@ final class DetailForecastViewController: UIViewController {
         setUpWeatherLabels()
         setUpTodayTemperatureLabels()
         setUpCollectionView()
+        setUpTableView()
     }
     
     private func setUpBackgroundView() {
@@ -149,6 +165,8 @@ final class DetailForecastViewController: UIViewController {
         ])
     }
     
+    // MARK: - UICollectionView
+    
     private func setUpCollectionView() {
         view.addSubview(collectionView)
         
@@ -209,6 +227,52 @@ final class DetailForecastViewController: UIViewController {
             return cell
         })
     }
+    
+    // MARK: - UITableViewRelated
+    
+    private func setUpTableView() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        if #available(iOS 13.0, *) {
+            tableView.dataSource = tableViewDataSource
+        } else {
+            // Fallback on earlier versions
+            tableView.dataSource = self
+        }
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        
+        let bottomBorder = UIView()
+        bottomBorder.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 13.0, *) {
+            bottomBorder.backgroundColor = .systemGray5
+        } else {
+            bottomBorder.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1) //Very light gray
+        }
+        view.addSubview(bottomBorder)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 2),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            bottomBorder.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            bottomBorder.widthAnchor.constraint(equalTo: view.widthAnchor),
+            bottomBorder.heightAnchor.constraint(equalToConstant: 1),
+            
+            tableView.bottomAnchor.constraint(equalTo: bottomBorder.topAnchor)
+        ])
+    }
+    
+    @available(iOS 13.0, *)
+    private func setUpTableViewDataSource() -> UITableViewDiffableDataSource<tableViewSection, ListBusiness> {
+        return UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, object in
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.tableViewCellReuseIdentifier) as! FiveDaysForecastTableViewCell
+            cell.setUp(with: object)
+            cell.backgroundColor = .clear
+            return cell
+        })
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -229,6 +293,45 @@ extension DetailForecastViewController: UICollectionViewDataSource {  //If under
         cell.backgroundColor = .clear
         return cell
     }
+}
+
+// MARK: - UITableViewDelegate
+
+extension DetailForecastViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01 //Return a really small value otherwise Apple will use UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01 //Return a really small value otherwise Apple will use UITableView.automaticDimension
+    }
+    
+}
+
+// MARK: - UITableViewDataSource
+
+extension DetailForecastViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return forecastItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellReuseIdentifier) as! FiveDaysForecastTableViewCell
+        let object = forecastItems[indexPath.row]
+        cell.setUp(with: object)
+        cell.backgroundColor = .clear
+        return cell
+    }
+    
+    
 }
 
 // MARK: - Presenter output
@@ -275,6 +378,18 @@ extension DetailForecastViewController: DetailForecastPresenterOutput {
         } else {
             // Fallback on earlier versions
             items = list
+        }
+    }
+    
+    func displayForecast(_ list: [ListBusiness]) {
+        if #available(iOS 13.0, *) {
+            var snapshot = NSDiffableDataSourceSnapshot<tableViewSection, ListBusiness>()
+            snapshot.appendSections([tableViewSection.main])
+            snapshot.appendItems(list, toSection: .main)
+            tableViewDataSource.apply(snapshot)
+        } else {
+            // Fallback on earlier versions
+            forecastItems = list
         }
     }
 }

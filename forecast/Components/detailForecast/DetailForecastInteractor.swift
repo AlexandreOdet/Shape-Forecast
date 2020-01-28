@@ -13,6 +13,7 @@ import API
 protocol DetailForecastInteractorOutput: class { //Presenter
     func display(_ currentWeather: CurrentWeather)
     func displayTodayWeather(_ list: [List])
+    func displayForecast(_ list: [List])
 }
 
 protocol DetailForecastInteractorAction: class { //Router
@@ -44,8 +45,10 @@ extension DetailForecastInteractor: DetailForecastViewControllerOutput {
                             } else {
                                 let todayWeather = result.value!.list.filter({ DateUtils.isDateInTheNext24Hours(Date(timeIntervalSince1970: TimeInterval($0.dt))) //Get today weather
                                 })
-                                print(todayWeather.count)
                                 self.output.displayTodayWeather(todayWeather)
+                                let forecast = result.value!.list.filter({ !DateUtils.isDateInTheNext24Hours(Date(timeIntervalSince1970: TimeInterval($0.dt)))
+                                })
+                                self.output.displayForecast(forecast)
                             }
             }).resume()
     }
