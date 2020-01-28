@@ -56,7 +56,6 @@ public struct Infos: Codable {
 public struct System: Codable {
     public let type: Int
     let id: Int
-    let message: Double
     let country: String
     public let sunrise: Date
     public let sunset: Date

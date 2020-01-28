@@ -36,7 +36,12 @@ extension DetailForecastInteractor: DetailForecastViewControllerOutput {
         apiClient.perform(DailyForecast.getHourlyForecast(for: currentWeather.coordinates.lat,
                                                           and: currentWeather.coordinates.lon),
                           completion: { result in
-        })
+                            if result.error != nil {
+                                print("An error occured while trying to retrieve hourly forecast")
+                            } else {
+                                print("Everything is fine")
+                            }
+            }).resume()
     }
     
     func didClickCloseButton() {

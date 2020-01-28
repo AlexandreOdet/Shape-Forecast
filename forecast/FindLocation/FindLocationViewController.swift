@@ -41,11 +41,7 @@ final class FindLocationViewController: UIViewController, Reachable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        for subview in view.subviews {
-            if subview is UIVisualEffectView {
-                subview.removeFromSuperview()
-            }
-        }
+        unblurView()
     }
     
     @objc
@@ -70,5 +66,13 @@ extension FindLocationViewController: FindLocationPresenterOutput {
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
+    }
+    
+    func unblurView() {
+        for subview in view.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
     }
 }

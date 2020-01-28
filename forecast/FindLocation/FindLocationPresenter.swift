@@ -12,6 +12,7 @@ import MapKit
 protocol FindLocationPresenterOutput: class {
     func blurView()
     func addAnnotation(at coordinate: CLLocationCoordinate2D)
+    func unblurView()
 }
 
 final class FindLocationPresenter {

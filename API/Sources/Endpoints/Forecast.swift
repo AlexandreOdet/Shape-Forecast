@@ -11,14 +11,14 @@ import Entities
 import Client
 
 extension DailyForecast {
-    public class func getHourlyForecast(for latitude: Double, and longitude: Double) -> Request<DailyForecast, APIError> {
+    public static func getHourlyForecast(for latitude: Double, and longitude: Double) -> Request<DailyForecast, APIError> {
         return Request(
             url: URL(string: "forecast/hourly")!,
             method: .get,
             parameters: [QueryParameters([URLQueryItem(name: "lat", value: "\(latitude)"),
                                           URLQueryItem(name: "lon", value: "\(longitude)")]
                 )],
-            resource: decodeResource(CurrentWeather.self),
+            resource: decodeResource(DailyForecast.self),
             error: APIError.init,
             needsAuthorization: true
         )
