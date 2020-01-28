@@ -12,8 +12,8 @@ import API
 
 protocol DetailForecastInteractorOutput: class { //Presenter
     func display(_ currentWeather: CurrentWeather)
-    func displayTodayWeather(_ list: [List])
-    func displayForecast(_ list: [List])
+    func displayTodayWeather(_ list: [ListBusiness])
+    func displayForecast(_ list: [ListBusiness])
 }
 
 protocol DetailForecastInteractorAction: class { //Router
@@ -45,10 +45,25 @@ extension DetailForecastInteractor: DetailForecastViewControllerOutput {
                             } else {
                                 let todayWeather = result.value!.list.filter({ DateUtils.isDateInTheNext24Hours(Date(timeIntervalSince1970: TimeInterval($0.dt))) //Get today weather
                                 })
-                                self.output.displayTodayWeather(todayWeather)
+                                self.output.displayTodayWeather(todayWeather.map { ListBusiness(fromResource: $0) })
                                 let forecast = result.value!.list.filter({ !DateUtils.isDateInTheNext24Hours(Date(timeIntervalSince1970: TimeInterval($0.dt)))
                                 })
-                                self.output.displayForecast(forecast)
+                                let empty: [Date: [List]] = [:]
+                                let groupedByDate = forecast.reduce(into: empty) { acc, cur in
+                                    let currentDate = Date(timeIntervalSince1970: TimeInterval(cur.dt))
+                                    let components = Calendar.current.dateComponents([.day], from: currentDate)
+                                    let date = Calendar.current.date(from: components)!
+                                    let existing = acc[date] ?? []
+                                    acc[date] = existing + [cur]
+                                }
+                                var array = [ListBusiness]()
+                                for value in groupedByDate.values {
+                                    let item = ListBusiness(fromResource: value.first!)
+                                    item.mainInfos.tempMax = value.max(by: { $0.main.tempMax < $1.main.tempMax})!.main.tempMax
+                                    item.mainInfos.tempMin = value.min(by: { $0.main.tempMin < $1.main.tempMin })!.main.tempMin
+                                    array.append(item)
+                                }
+                                self.output.displayForecast(array.sorted(by: { $0.date < $1.date }))
                             }
             }).resume()
     }

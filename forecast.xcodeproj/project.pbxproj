@@ -53,6 +53,7 @@
 		FA8CAF5623DDC8C800D28B0A /* DetailForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CAF5523DDC8C800D28B0A /* DetailForecastViewController.swift */; };
 		FAAEA33523E0950F001BC2AC /* DetailForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA33423E0950F001BC2AC /* DetailForecastCollectionViewCell.swift */; };
 		FAAEA33723E0A11E001BC2AC /* FiveDaysForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA33623E0A11E001BC2AC /* FiveDaysForecastTableViewCell.swift */; };
+		FAAEA33923E0D6CA001BC2AC /* MainBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA33823E0D6CA001BC2AC /* MainBusiness.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,7 @@
 		FA8CAF5523DDC8C800D28B0A /* DetailForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastViewController.swift; sourceTree = "<group>"; };
 		FAAEA33423E0950F001BC2AC /* DetailForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForecastCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAAEA33623E0A11E001BC2AC /* FiveDaysForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysForecastTableViewCell.swift; sourceTree = "<group>"; };
+		FAAEA33823E0D6CA001BC2AC /* MainBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBusiness.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				52F74D9723E047AE004F63F6 /* ListBusiness.swift */,
+				FAAEA33823E0D6CA001BC2AC /* MainBusiness.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				FAAEA33523E0950F001BC2AC /* DetailForecastCollectionViewCell.swift in Sources */,
 				52BD156723DEF4BE007A68C3 /* TemperatureUtils.swift in Sources */,
 				3689B1CE221BE67C00E50ED5 /* AppDelegate.swift in Sources */,
+				FAAEA33923E0D6CA001BC2AC /* MainBusiness.swift in Sources */,
 				FA8CAF5423DDC8AC00D28B0A /* DetailForecastInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

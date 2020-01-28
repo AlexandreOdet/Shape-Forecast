@@ -261,6 +261,7 @@ final class DetailForecastViewController: UIViewController {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         
         let bottomBorder = UIView()
         bottomBorder.translatesAutoresizingMaskIntoConstraints = false
@@ -289,6 +290,7 @@ final class DetailForecastViewController: UIViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: self.tableViewCellReuseIdentifier) as! FiveDaysForecastTableViewCell
             cell.setUp(with: object)
             cell.backgroundColor = .clear
+            cell.selectionStyle = .none
             return cell
         })
     }
@@ -353,6 +355,7 @@ extension DetailForecastViewController: UITableViewDataSource {
         let object = forecastItems[indexPath.row]
         cell.setUp(with: object)
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         return cell
     }
     

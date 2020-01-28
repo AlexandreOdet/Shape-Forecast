@@ -11,13 +11,13 @@ import Entities
 
 final class ListBusiness {
     let date: Int
-    let weather: Weather
-    let mainInfos: Main
+    var weather: Weather
+    var mainInfos: MainBusiness
     
     init(fromResource res: List) {
         self.date = res.dt
         self.weather = Weather.init(with: res.weather.first!.id)
-        self.mainInfos = res.main
+        self.mainInfos = MainBusiness(fromResource: res.main)
     }
 }
 

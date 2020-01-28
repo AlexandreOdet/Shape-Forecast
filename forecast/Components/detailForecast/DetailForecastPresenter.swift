@@ -39,17 +39,11 @@ extension DetailForecastPresenter: DetailForecastInteractorOutput {
         output.display(maxTemp: Temperature.kelvinToCelsius(currentWeather.infos.tempMax))
     }
     
-    func displayTodayWeather(_ list: [List]) {
-        let businessList = list.map({
-            ListBusiness(fromResource: $0)
-        })
-        output.displayTodayWeather(businessList)
+    func displayTodayWeather(_ list: [ListBusiness]) {
+        output.displayTodayWeather(list)
     }
     
-    func displayForecast(_ list: [List]) {
-        let businessList = list.map {
-            ListBusiness(fromResource: $0)
-        }
-        output.displayForecast(businessList)
+    func displayForecast(_ list: [ListBusiness]) {
+        output.displayForecast(list)
     }
 }
