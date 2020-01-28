@@ -27,4 +27,8 @@ extension FindLocationPresenter: FindLocationInteractorOutput {
     func locationSelected(at coordinate: CLLocationCoordinate2D) {
         output.addAnnotation(at: coordinate)
     }
+    
+    func unblurView() {
+        output.unblurView()
+    }
 }

@@ -55,7 +55,7 @@ extension DetailForecastInteractor: DetailForecastViewControllerOutput {
                                     let date = Calendar.current.date(from: components)!
                                     let existing = acc[date] ?? []
                                     acc[date] = existing + [cur]
-                                }
+                                } //Gather forecast by day
                                 var array = [ListBusiness]()
                                 for value in groupedByDate.values {
                                     let item = ListBusiness(fromResource: value.first!)

@@ -13,6 +13,7 @@ import Entities
 protocol FindLocationInteractorOutput: class {
     func blurView()
     func locationSelected(at coordinate: CLLocationCoordinate2D)
+    func unblurView()
 }
 
 protocol FindLocationInteractorAction: class {
@@ -46,11 +47,13 @@ extension FindLocationInteractor: FindLocationViewControllerOutput {
         output.blurView()
         guard isReachable else {
             action.connectivityNotAvailable()
+            output.unblurView()
             return
         }
         api.perform(CurrentWeather.getCurrent(for: coordinate.latitude, and: coordinate.longitude), completion: { result in
             if result.error != nil {
                 self.action.weatherFecthDidFail()
+                self.output.unblurView()
             } else {
                 //Display weather
                 DispatchQueue.main.async {

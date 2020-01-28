@@ -383,7 +383,7 @@ extension DetailForecastViewController: DetailForecastPresenterOutput {
     }
     
     func set(backgroundViewWith weather: Weather) {
-        backgroundView.alpha = 0.5
+        backgroundView.alpha = 0.8
         backgroundView.image = weather.backgroundView
     }
     

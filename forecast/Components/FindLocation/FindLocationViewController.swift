@@ -70,9 +70,12 @@ extension FindLocationViewController: FindLocationPresenterOutput {
     }
     
     func unblurView() {
-        for subview in view.subviews {
-            if subview is UIVisualEffectView {
-                subview.removeFromSuperview()
+        DispatchQueue.main.async {
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            for subview in self.view.subviews {
+                if subview is UIVisualEffectView {
+                    subview.removeFromSuperview()
+                }
             }
         }
     }
