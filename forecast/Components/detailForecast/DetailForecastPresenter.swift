@@ -17,6 +17,7 @@ protocol DetailForecastPresenterOutput: class { //ViewController
     func displayTodayDate()
     func display(minTemp: Double)
     func display(maxTemp: Double)
+    func displayTodayWeather(_ list: [ListBusiness])
 }
 
 final class DetailForecastPresenter {
@@ -41,5 +42,6 @@ extension DetailForecastPresenter: DetailForecastInteractorOutput {
         let businessList = list.map({
             ListBusiness(fromResource: $0)
         })
+        output.displayTodayWeather(businessList)
     }
 }

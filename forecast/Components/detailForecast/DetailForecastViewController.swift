@@ -31,16 +31,32 @@ final class DetailForecastViewController: UIViewController {
     private lazy var maxTemperatureLabel = UILabel(frame: .zero)
     private lazy var minTemperatureLabel = UILabel(frame: .zero)
     
+    //24h forecast
+    private let collectionViewItemsReuseIdentifier = "todayWeatherItem"
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width / 5, height: 60)
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width / 5, height: 120)
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: flowLayout)
+        collectionView.register(DetailForecastCollectionViewCell.self, forCellWithReuseIdentifier: collectionViewItemsReuseIdentifier)
         return collectionView
     }()
     
     @available(iOS 13.0, *)
     private lazy var collectionViewDataSource = setUpCollectionViewDataSource()
+    
+    private var items = [ListBusiness]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    //5 days forecast
+    private let tableViewCellReuseIdentifier = "fiveDayForecastCell"
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: view.frame, style: .grouped)
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,26 +152,86 @@ final class DetailForecastViewController: UIViewController {
     private func setUpCollectionView() {
         view.addSubview(collectionView)
         
-        collectionView.delegate = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        let topBorder = UIView()
+        let bottomBorder = UIView()
+        
+        if #available(iOS 13.0, *) {
+            topBorder.backgroundColor = .systemGray5
+            bottomBorder.backgroundColor = .systemGray5
+        } else {
+            topBorder.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1) //Very light gray
+            bottomBorder.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+        }
+        topBorder.translatesAutoresizingMaskIntoConstraints = false
+        bottomBorder.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(topBorder)
+        view.addSubview(bottomBorder)
         if #available(iOS 13.0, *) {
             collectionView.dataSource = collectionViewDataSource
         } else {
             // Fallback on earlier versions
+            collectionView.dataSource = self
         }
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: minTemperatureLabel.bottomAnchor, constant: 10),
+            collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 120),
+            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            topBorder.bottomAnchor.constraint(equalTo: collectionView.topAnchor),
+            topBorder.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            topBorder.widthAnchor.constraint(equalTo: view.widthAnchor),
+            topBorder.heightAnchor.constraint(equalToConstant: 1),
+            
+            bottomBorder.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            bottomBorder.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bottomBorder.widthAnchor.constraint(equalTo: view.widthAnchor),
+            bottomBorder.heightAnchor.constraint(equalToConstant: 1)
+        ])
     }
     
     @available(iOS 13.0, *)
-    private func setUpCollectionViewDataSource() -> UICollectionViewDiffableDataSource<ListBusiness, collectionViewSection> {
-        return UICollectionViewDiffableDataSource(collectionView: self.collectionView,
-                                                  cellProvider: { collectionView, indexPath, object in
-                                    return UICollectionViewCell()
+    private func setUpCollectionViewDataSource() -> UICollectionViewDiffableDataSource<collectionViewSection, ListBusiness> {
+        return UICollectionViewDiffableDataSource(collectionView: self.collectionView, cellProvider: { collectionView, indexPath, object in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.collectionViewItemsReuseIdentifier, for: indexPath) as! DetailForecastCollectionViewCell
+            if indexPath.row == 0 {
+                cell.setUpView(with: object, andIsNow: true)
+            } else {
+                 cell.setUpView(with: object, andIsNow: false)
+            }
+            cell.backgroundColor = .clear
+            return cell
         })
     }
 }
 
-extension DetailForecastViewController: UICollectionViewDelegate {
+// MARK: - UICollectionViewDataSource
+
+extension DetailForecastViewController: UICollectionViewDataSource {  //If under iOS 13 implement the dataSource protocol.
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items.count
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let object = items[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.collectionViewItemsReuseIdentifier, for: indexPath) as! DetailForecastCollectionViewCell
+        if indexPath.row == 0 {
+            cell.setUpView(with: object, andIsNow: true)
+        } else {
+             cell.setUpView(with: object, andIsNow: false)
+        }
+        cell.backgroundColor = .clear
+        return cell
+    }
 }
+
+// MARK: - Presenter output
 
 extension DetailForecastViewController: DetailForecastPresenterOutput {
     func displayTodayDate() {
@@ -188,5 +264,17 @@ extension DetailForecastViewController: DetailForecastPresenterOutput {
     func display(maxTemp: Double) {
         let formattedTemperature = String(format: "%.0f", maxTemp)
         maxTemperatureLabel.text = formattedTemperature
+    }
+    
+    func displayTodayWeather(_ list: [ListBusiness]) {
+        if #available(iOS 13.0, *) {
+            var snapshot = NSDiffableDataSourceSnapshot<collectionViewSection, ListBusiness>()
+            snapshot.appendSections([collectionViewSection.main])
+            snapshot.appendItems(list, toSection: .main)
+            collectionViewDataSource.apply(snapshot)
+        } else {
+            // Fallback on earlier versions
+            items = list
+        }
     }
 }

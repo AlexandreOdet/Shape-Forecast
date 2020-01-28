@@ -22,7 +22,7 @@ public struct City: Codable {
     let name: String
     let coord: Coord
     let country: String
-    let population, timezone, sunrise, sunset: Int
+    let timezone, sunrise, sunset: Int
 }
 
 // MARK: - Coord

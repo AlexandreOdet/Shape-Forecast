@@ -42,9 +42,10 @@ extension DetailForecastInteractor: DetailForecastViewControllerOutput {
                             if result.error != nil {
                                 self.action.displayErrorAlert()
                             } else {
-                                let todayWeather = result.value?.list.filter({ DateUtils.isDateInToday(Date(timeIntervalSince1970: TimeInterval($0.dt))) //Get today weather
-                                    
+                                let todayWeather = result.value!.list.filter({ DateUtils.isDateInTheNext24Hours(Date(timeIntervalSince1970: TimeInterval($0.dt))) //Get today weather
                                 })
+                                print(todayWeather.count)
+                                self.output.displayTodayWeather(todayWeather)
                             }
             }).resume()
     }
