@@ -45,7 +45,6 @@ public struct List: Codable {
     }
 }
 
-
 // MARK: - Main
 public struct Main: Codable {
     let temp, feelsLike, tempMin, tempMax: Double

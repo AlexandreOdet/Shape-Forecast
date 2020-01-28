@@ -13,7 +13,7 @@ import Client
 extension DailyForecast {
     public static func getHourlyForecast(for latitude: Double, and longitude: Double) -> Request<DailyForecast, APIError> {
         return Request(
-            url: URL(string: "forecast/hourly")!,
+            url: URL(string: "forecast")!,
             method: .get,
             parameters: [QueryParameters([URLQueryItem(name: "lat", value: "\(latitude)"),
                                           URLQueryItem(name: "lon", value: "\(longitude)")]
