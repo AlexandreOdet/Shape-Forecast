@@ -45,7 +45,7 @@ extension FindLocationRouter: FindLocationInteractorAction {
     
     func routeToDetail(_ weather: CurrentWeather) {
         dismissPreviousAlertIfNeeded(withCompletion: {
-            let nextViewController = DetailWeatherConfig.build(with: weather)
+            let nextViewController = DetailWeatherConfig.build(with: weather, andApi: self.api)
             nextViewController.modalPresentationStyle = .fullScreen
             self.viewController.present(nextViewController, animated: true)
         })

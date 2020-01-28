@@ -8,6 +8,7 @@
 
 import Foundation
 import Entities
+import API
 
 protocol DetailForecastInteractorOutput: class { //Presenter
     func display(_ currentWeather: CurrentWeather)
@@ -22,14 +23,20 @@ final class DetailForecastInteractor {
     var output: DetailForecastInteractorOutput!
     
     private var currentWeather: CurrentWeather
-    init(with weather: CurrentWeather) {
+    private var apiClient: ForecastClient
+    init(with weather: CurrentWeather, and apiClient: ForecastClient) {
         self.currentWeather = weather
+        self.apiClient = apiClient
     }
 }
 
 extension DetailForecastInteractor: DetailForecastViewControllerOutput {
     func viewDidLoad() {
         output.display(currentWeather)
+        apiClient.perform(DailyForecast.getHourlyForecast(for: currentWeather.coordinates.lat,
+                                                          and: currentWeather.coordinates.lon),
+                          completion: { result in
+        })
     }
     
     func didClickCloseButton() {

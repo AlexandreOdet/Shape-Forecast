@@ -8,13 +8,14 @@
 
 import Foundation
 import Entities
+import API
 
 struct DetailWeatherConfig {
-    static func build(with weather: CurrentWeather) -> UIViewController {
+    static func build(with weather: CurrentWeather, andApi client: ForecastClient) -> UIViewController {
         let viewController = DetailForecastViewController()
         let router = DetailForecastRouter()
         let presenter = DetailForecastPresenter()
-        let interactor = DetailForecastInteractor(with: weather)
+        let interactor = DetailForecastInteractor(with: weather, and: client)
         
         viewController.output = interactor
         interactor.action = router

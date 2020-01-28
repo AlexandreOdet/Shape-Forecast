@@ -31,15 +31,8 @@ public struct CurrentWeather: Codable {
 }
 
 public struct Coordinates: Codable {
-    let lat: Double
-    let lon: Double
-}
-
-public struct Weather: Codable {
-    public let id: Int
-    public let main: String
-    public let description: String
-    public let icon: String
+    public let lat: Double
+    public let lon: Double
 }
 
 public struct Infos: Codable {
@@ -58,20 +51,6 @@ public struct Infos: Codable {
     public let tempMax: Double
     public let pressure: Int
     public let humidity: Int
-}
-
-public struct Wind: Codable {
-    
-    enum CodingKeys: String, CodingKey {
-        case speed
-        case degree = "deg"
-    }
-    public let speed: Double
-    public let degree: Double
-}
-
-public struct Cloud: Codable {
-    public let all: Int
 }
 
 public struct System: Codable {
