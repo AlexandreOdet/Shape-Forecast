@@ -19,9 +19,10 @@ protocol DetailForecastInteractorOutput: class { //Presenter
 protocol DetailForecastInteractorAction: class { //Router
     func displayErrorAlert()
     func didClickCloseButton()
+    func connectivityNotAvailable()
 }
 
-final class DetailForecastInteractor {
+final class DetailForecastInteractor: Reachable {
     var action: DetailForecastInteractorAction!
     var output: DetailForecastInteractorOutput!
     
@@ -37,6 +38,10 @@ final class DetailForecastInteractor {
 extension DetailForecastInteractor: DetailForecastViewControllerOutput {
     func viewDidLoad() {
         output.display(currentWeather)
+        guard isReachable else {
+            action.connectivityNotAvailable()
+            return
+        }
         apiClient.perform(DailyForecast.getHourlyForecast(for: currentWeather.coordinates.lat,
                                                           and: currentWeather.coordinates.lon),
                           completion: { result in

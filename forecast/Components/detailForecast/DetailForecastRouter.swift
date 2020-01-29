@@ -11,6 +11,14 @@ import UIKit
 
 final class DetailForecastRouter {
     var viewController: DetailForecastViewController!
+    
+    private func dismissPreviousAlertIfNeeded(withCompletion completion: (() -> ())? = nil) {
+        DispatchQueue.main.async {
+            if self.viewController.presentedViewController != nil && self.viewController.presentedViewController is UIAlertController { //Remove previous alert if needed.
+                self.viewController.presentedViewController?.dismiss(animated: true, completion: completion)
+            }
+        }
+    }
 }
 
 extension DetailForecastRouter: DetailForecastInteractorAction {
@@ -26,5 +34,10 @@ extension DetailForecastRouter: DetailForecastInteractorAction {
         viewController.dismiss(animated: true, completion: nil)
     }
     
+    func connectivityNotAvailable() {
+        self.dismissPreviousAlertIfNeeded(withCompletion: {
+            self.viewController.alertWhenNetworkNotAvailable()
+        })
+    }
 
 }
