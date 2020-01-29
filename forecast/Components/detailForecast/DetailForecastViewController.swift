@@ -22,7 +22,7 @@ fileprivate enum tableViewSection: CaseIterable {
     case main
 }
 
-final class DetailForecastViewController: UIViewController {
+final class DetailForecastViewController: UIViewController, Reachable {
     var output: DetailForecastViewControllerOutput!
     
     private lazy var closeButton = UIButton()
